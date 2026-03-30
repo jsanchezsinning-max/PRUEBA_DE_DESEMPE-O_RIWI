@@ -1,9 +1,10 @@
-student_dictionary = []
+student_dictionary = [] #This is a dictionary where each student's information will be stored.
 
-def menu():
+def menu(): # This function contains the main menu, indicating what options the user can use.
     option = ""
-
-    while option != "1" and option != "2" and option != "3" and option != "4" and option != "5" and option != "6":
+    
+    # The while loop is used to validate that the user chooses an option between 1 and 6.
+    while option != "1" and option != "2" and option != "3" and option != "4" and option != "5" and option != "6": 
         print("MENU")
         print("""
             1. Add new student
@@ -13,14 +14,14 @@ def menu():
             5. Delete student
             6. Exit
                 """)
-        option = input("Choose an Option: ").strip()
+        option = input("Choose an Option: ").strip() # The variable "option" will store the option that the user chooses.
 
         if option != "1" and option != "2" and option != "3" and option != "4" and option != "5" and option != "6":
             print("Invalid option, try again.\n")
-
+            # This "if" sends a message if the option is incorrect.
     return option
 
-
+# This function is to validate that the user only enters text.
 def validate_str(message):
     text = input(message).strip()
 
@@ -30,7 +31,7 @@ def validate_str(message):
 
     return text
 
-
+# This function is to validate that the user only enters numbers.
 def validate_int(message):
     value = input(message).strip()
 
@@ -40,7 +41,7 @@ def validate_int(message):
 
     return int(value)
 
-
+# When the program asks for the student's status, this function is to validate that the user can only write between 2 options, active and inactive.
 def validate_state(message):
     state = input(message).strip().lower()
 
@@ -50,20 +51,20 @@ def validate_state(message):
 
     return state
 
-
+# This function is to notify the user that the student has already been registered.
 def id_exists(student_dictionary, id_student):
     for student in student_dictionary:
         if student["Id"] == id_student:
             return True
     return False
 
-
+# This function is for adding a new student, who will be stored in the "student_dictionary" dictionary.
 def add_new_student(student_dictionary):
     print("\n=============== ADD A NEW STUDENT ===============")
 
     id_student = validate_int("Enter Student ID: ")
 
-    while id_exists(student_dictionary, id_student):
+    while id_exists(student_dictionary, id_student): # Here we use the "id_exist" function
         print("Error: This ID already exists.")
         id_student = validate_int("Enter a different Student ID: ")
 
@@ -83,7 +84,7 @@ def add_new_student(student_dictionary):
     student_dictionary.append(student)
     print("Student added successfully!\n")
 
-
+# This function allows the user to see all students saved up to that point.
 def view_students(student_dictionary):
     print("\n=============== STUDENTS LIST ===============")
 
@@ -99,7 +100,7 @@ def view_students(student_dictionary):
               "| State:", student["state"])
     print()
 
-
+# This function allows you to search for a student by name and access all their information.
 def search_student(student_dictionary):
     print("\n=============== SEARCH FOR A STUDENT ===============")
 
@@ -118,7 +119,7 @@ def search_student(student_dictionary):
     print("Student not found.\n")
     return None
 
-
+# This function updates the student's information if the user so desires.
 def update_student(student_dictionary):
     print("\n================ UPDATE STUDENT INFORMATION ===============")
 
@@ -128,8 +129,8 @@ def update_student(student_dictionary):
 
     student = search_student(student_dictionary)
 
-    if student:
-        print("Leave blank if you don't want to change something.")
+    if student: # The function allows leaving blank spaces if the user does not wish to update that field.
+        print("Leave blank if you don't want to change something.") 
 
         age_input = input("New age: ").strip()
         program_input = input("New program: ").strip()
@@ -146,7 +147,7 @@ def update_student(student_dictionary):
 
         print("Student updated successfully!\n")
 
-
+# This function removes any student from the dictionary
 def delete_student(student_dictionary):
     print("\n================ DELETE STUDENT ===============")
 
@@ -165,11 +166,11 @@ def delete_student(student_dictionary):
     print("Student not found.\n")
 
 
-
-running = True
+# This is the main loop; the program will run until the user decides to exit with option 6.
+running = True # This variable will be true until the user decides to exit, at which point it will become false and the user will exit the program.
 
 while running:
-    option = menu()
+    option = menu() # The menu will continue to print until the program finishes.
 
     if option == "1":
         add_new_student(student_dictionary)
